@@ -6,7 +6,6 @@ from Utilities.baseClass import baseClass
 
 
 class contactUs(baseClass):
-    contactUsButton = (By.CSS_SELECTOR, "a[href='/contact_us']")
     messageLocator = (By.XPATH, "//div[@class='contact-form']/h2")
     namepath = (By.CSS_SELECTOR, "input[placeholder='Name']")
     emailpath = (By.XPATH, "//input[@placeholder='Email']")
@@ -20,8 +19,7 @@ class contactUs(baseClass):
     def __init__(self, driver):
         self.driver = driver
 
-    def contactUsElement(self):
-        self.driver.find_element(*contactUs.contactUsButton).click()
+    def getintouchText(self):
         return self.driver.find_element(*contactUs.messageLocator).text
 
     def fillupdata(self):

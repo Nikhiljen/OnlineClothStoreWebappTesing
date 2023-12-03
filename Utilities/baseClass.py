@@ -15,11 +15,8 @@ class baseClass:
     accountDeleteMessage = (By.CSS_SELECTOR, "h2[class='title text-center'] b")
     continueButtonAfterDeleteAccount = (By.CSS_SELECTOR, ".btn.btn-primary")
     logineUserLocator = (By.XPATH, "//li[10]//a[1]")
-    logoutLocator = (By.XPATH, "a[href='/logout']")
-    nameLocator = (By.CSS_SELECTOR, "input[placeholder='Name']")
-    emailLocator = (By.XPATH, "//input[@data-qa='signup-email']")
-    signUpButton = (By.CSS_SELECTOR, "button[data-qa='signup-button']")
-    verifyText2 = (By.XPATH, "//div[@class='login-form']/h2[1]")
+    logoutLocator = (By.CSS_SELECTOR, "a[href='/logout']")
+
 
     def getLogger(self):
         loggerName = inspect.stack()[1][3]
@@ -44,26 +41,8 @@ class baseClass:
         except TimeoutException:
             log.info("Timed out waiting for page to load.")
 
-    def signUpData(self):
-        self.driver.find_element(*baseClass.nameLocator).send_keys("Nikhil")
-        self.driver.find_element(*baseClass.emailLocator).send_keys("npjengte8@gmail.com")
-        self.driver.find_element(*baseClass.signUpButton).click()
-        verifyText = self.driver.find_element(*baseClass.verifyText2).text
-        return verifyText
-
-    def verifySignUpText(self):
-        self.driver.find_element(By.CSS_SELECTOR, "a[href='/login']").click()
-        verifyText = self.driver.find_element(By.CSS_SELECTOR, "div[class='signup-form'] h2").text
-        return verifyText
-
-    def verifyLogineText(self):
-        self.driver.find_element(By.CSS_SELECTOR, "a[href='/login']").click()
-        logineText = self.driver.find_element(By.CSS_SELECTOR, "div[class='login-form'] h2").text
-        return logineText
-
     def verifyLogineAsUser(self):
         logineUserText = self.driver.find_element(*baseClass.logineUserLocator).text
-        # print(logineUserText)
         return logineUserText
 
     def verifyDeleteAccountSuccessful(self):
@@ -74,3 +53,5 @@ class baseClass:
 
     def logoutAccountSuccessful(self):
         self.driver.find_element(*baseClass.logoutLocator).click()
+        login_page_url = 'https://automationexercise.com/login'
+        return login_page_url

@@ -1,6 +1,5 @@
 from Utilities.baseClass import baseClass
 from testPages.homePagetest import HomePage
-from testCase.test_HomePage import homepage
 
 
 # Launch browser
@@ -12,13 +11,13 @@ from testCase.test_HomePage import homepage
 # 7. Verify success message 'You have been successfully subscribed!' is visible
 class TestTen(baseClass):
 
-    def test_subscribeVerificaton(self):
+    def test_subscribeEmailVerificatononHomepage(self):
         text = self.is_homePage_visible()
         assert "Automation" in text
 
         subscribtion = HomePage(self.driver)
-        subscription_text_element = subscribtion.verifySubscriptionTextElement()
+        subscription_text_element = subscribtion.verifySubscriptionTextHompage()
         assert  "SUBSCRIPTION" in subscription_text_element,  "Subscription text is not visible."
 
-        success_message_element = subscribtion.subscriptionSuccefull()
+        success_message_element = subscribtion.subscriptionSuccefullonHomepage()
         assert success_message_element.is_displayed(), "Success message is not visible."

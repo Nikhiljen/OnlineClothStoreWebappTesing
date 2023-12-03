@@ -4,8 +4,7 @@
 # 4. Click on 'Test Cases' button
 # 5. Verify user is navigated to test cases page successfully
 from Utilities.baseClass import baseClass
-from testPages.testCasePage import testCasePage
-
+from testPages.homePagetest import HomePage
 
 class TestSeven(baseClass):
 
@@ -13,5 +12,8 @@ class TestSeven(baseClass):
         text = self.is_homePage_visible()
         assert "Automation" in text
 
-        returnText = testCasePage.testCaselinkpage(self)
-        assert "Below is the list of test Cases for you to practice the Automation" in returnText
+        homepage = HomePage(self.driver)
+        testCasePage = homepage.testCaseButton()
+
+        testcaseurl = testCasePage.testCasepage(self)
+        assert 'https://automationexercise.com/test_cases' == testcaseurl, f"Expected URL: {'https://automationexercise.com/test_cases'}, Actual URL: {testcaseurl}"

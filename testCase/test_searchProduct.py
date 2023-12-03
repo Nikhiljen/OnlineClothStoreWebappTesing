@@ -1,5 +1,5 @@
 from Utilities.baseClass import baseClass
-from testPages.productPage import productPageTest
+from testPages.homePagetest import HomePage
 
 # 1. Launch browser
 # 2. Navigate to url 'http://automationexercise.com'
@@ -14,15 +14,15 @@ class TestNine(baseClass):
     def test_ProductListPageButton(self):
         text = self.is_homePage_visible()
         assert "Automation" in text
+        
+        homepage = HomePage(self.driver)
+        product = homepage.productButton()
 
-        productSearch = productPageTest(self.driver)
+        productpagetext = product.productlinkpage()
+        assert "ALL PRODUCTS" in productpagetext
 
-        productSearch.productlinkpage()
-
-        searchproducttext = productSearch.searchProduct()
+        searchproducttext = product.searchProduct()
         assert "SEARCHED PRODUCTS" in searchproducttext
 
-        product_list = productSearch.productsearchList()
-        for product_element in product_list:
-            assert product_element.is_displayed(), "Products list is not visible on the webpage"
-
+        product_list = product.are_products_visible()
+        assert product_list, "Not all products are visible"

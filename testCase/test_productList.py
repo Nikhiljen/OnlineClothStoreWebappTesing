@@ -1,6 +1,5 @@
 from Utilities.baseClass import baseClass
-from testPages.productPage import productPageTest
-
+from testPages.homePagetest import HomePage
 
 # 1. Launch browser
 # 2. Navigate to url 'http://automationexercise.com'
@@ -17,7 +16,8 @@ class TestEight(baseClass):
         text = self.is_homePage_visible()
         assert "Automation" in text
 
-        product = productPageTest(self.driver)
+        homepage = HomePage(self.driver)
+        product = homepage.productButton()
 
         productpagetext = product.productlinkpage()
         assert "ALL PRODUCTS" in productpagetext

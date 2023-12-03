@@ -1,7 +1,7 @@
 
 
 from Utilities.baseClass import baseClass
-from testPages.contactUsFrom import contactUs
+from testPages.homePagetest import HomePage
 
 
 # 1. Launch browser
@@ -23,18 +23,19 @@ class TestSix(baseClass):
         text = self.is_homePage_visible()
         assert "Automation" in text
 
-        contactclick = contactUs(self.driver)
+        contactButton = HomePage(self.driver)
+        contactPage = contactButton.contactUsButton()
 
-        verifyText = contactclick.contactUsElement()
+        verifyText = contactPage.getintouchText()
         assert "GET IN TOUCH" in verifyText
 
-        contactclick.fillupdata()
-        contactclick.alertcheck()
+        contactPage.fillupdata()
+        contactPage.alertcheck()
 
-        successMessge = contactclick.verifyContactusmessage()
+        successMessge = contactPage.verifyContactusmessage()
         assert "Success! Your details have been submitted successfully." in successMessge
 
-        homeUrl = contactclick.homepagereturn()
+        homeUrl = contactPage.homepagereturn()
         assert 'https://automationexercise.com/' == homeUrl
 
 
