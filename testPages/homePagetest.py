@@ -22,6 +22,7 @@ class HomePage(baseClass):
     productPageButton = (By.CSS_SELECTOR, "a[href='/products']")
     CartPageButton = (By.CSS_SELECTOR, "a[href='/view_cart']")
     viewProductLocator = (By.CSS_SELECTOR, "a[href='/product_details/1']")
+    order_confirm_locator = (By.XPATH, "//p[normalize-space()='Congratulations! Your order has been confirmed!']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -33,8 +34,8 @@ class HomePage(baseClass):
 
     def contactUsButton(self):
         self.driver.find_element(*HomePage.contactUsButton).click()
-        contactupPage = contactUs(self.driver)
-        return contactupPage
+        contactusPage = contactUs(self.driver)
+        return contactusPage
 
     def testCaseButton(self):
         self.driver.find_element(*HomePage.testCaseButton).click()
@@ -67,6 +68,9 @@ class HomePage(baseClass):
         self.driver.find_element(*HomePage.viewProductLocator).click()
         productpage = productPage(self.driver)
         return productpage
+
+    def OrderConfirmVerification(self):
+        return self.driver.find_element(*HomePage.order_confirm_locator).text
 
     @pytest.fixture(params=signUpPageData.homepageTestData)
     def getData(self, request):
