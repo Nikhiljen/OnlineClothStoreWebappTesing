@@ -1,7 +1,6 @@
 import pytest
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Utilities.baseClass import baseClass
@@ -17,12 +16,16 @@ class HomePage(baseClass):
     subscriptionLocator = (By.ID, "susbscribe_email")
     subscribeButton = (By.ID, "subscribe")
     subscribeText = (By.CSS_SELECTOR, "div[class='single-widget'] h2")
-    contactUsButton = (By.CSS_SELECTOR, "a[href='/contact_us']")
-    testCaseButton = (By.CSS_SELECTOR, "a[href='/test_cases']")
+    ContactUsButton = (By.CSS_SELECTOR, "a[href='/contact_us']")
+    TestCaseButton = (By.CSS_SELECTOR, "a[href='/test_cases']")
     productPageButton = (By.CSS_SELECTOR, "a[href='/products']")
     CartPageButton = (By.CSS_SELECTOR, "a[href='/view_cart']")
     viewProductLocator = (By.CSS_SELECTOR, "a[href='/product_details/1']")
-    order_confirm_locator = (By.XPATH, "//p[normalize-space()='Congratulations! Your order has been confirmed!']")
+    category_locator = (By.XPATH, "//div[@class='left-sidebar']/h2")
+    woman_category = (By.XPATH, "//a[@href='#Women']")
+    woman_category_productList = (By.XPATH, "//div[@id='Women']/div/ul/li/a")
+    woman_dress_category = (By.CSS_SELECTOR, "a[href='/category_products/1']")
+    Men_category = (By.CSS_SELECTOR, "//a[normalize-space()='Men']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -33,12 +36,12 @@ class HomePage(baseClass):
         return loginepage
 
     def contactUsButton(self):
-        self.driver.find_element(*HomePage.contactUsButton).click()
+        self.driver.find_element(*HomePage.ContactUsButton).click()
         contactusPage = contactUs(self.driver)
         return contactusPage
 
     def testCaseButton(self):
-        self.driver.find_element(*HomePage.testCaseButton).click()
+        self.driver.find_element(*HomePage.TestCaseButton).click()
         TestCase = testCasePage(self.driver)
         return TestCase
 
@@ -69,8 +72,22 @@ class HomePage(baseClass):
         productpage = productPage(self.driver)
         return productpage
 
-    def OrderConfirmVerification(self):
-        return self.driver.find_element(*HomePage.order_confirm_locator).text
+    def category(self):
+        category_text = self.driver.find_element(*HomePage.category_locator).text
+        return category_text
+
+    def WomanCategory(self):
+        self.driver.find_element(*HomePage.woman_category).click()
+        # self.driver.find_element(By.CSS_SELECTOR , "a[href = '/category_products/1']").click()
+        product_list = [ ]
+        product_list = self.driver.find_elements(*HomePage.woman_category_productList)
+        for product in product_list:
+            if(product.text == "Dress"):
+                product.click()
+                product_page = productPage(self.driver)
+                return product_page
+                break;
+
 
     @pytest.fixture(params=signUpPageData.homepageTestData)
     def getData(self, request):

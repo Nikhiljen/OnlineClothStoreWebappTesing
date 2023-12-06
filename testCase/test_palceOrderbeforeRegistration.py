@@ -55,10 +55,10 @@ class TestThirteen(baseClass):
         place_order.CardDetails()
 
         # 17. Click 'Pay and Confirm Order' button
-        place_order.payOrder()
+        confirmPage = place_order.payOrder()
 
         # 18. Verify success message 'Your order has been placed successfully!'
-        order_success_message = homepage.OrderConfirmVerification()
+        order_success_message = confirmPage.OrderConfirmVerification()
         assert "Congratulations!" in order_success_message
 
         # 19. Click 'Delete Account' button

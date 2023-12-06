@@ -37,7 +37,7 @@ class signUpPage:
     def accountInformationPage(self):
         self.driver.find_element(*signUpPage.tileLocator).click()
         assert self.driver.find_element(*signUpPage.Name).get_attribute('value') == "Nikhil"
-        assert self.driver.find_element(*signUpPage.Email).get_attribute('value') == "npjengte9@gmail.com"
+        assert self.driver.find_element(*signUpPage.Email).get_attribute('value') == "npjengte10@gmail.com"
         self.driver.find_element(*signUpPage.Password).send_keys("Nikhil@123")
         Select(self.driver.find_element(*signUpPage.Day)).select_by_value("4")
         Select(self.driver.find_element(*signUpPage.Month)).select_by_visible_text("June")

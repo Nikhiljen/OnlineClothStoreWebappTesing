@@ -53,5 +53,5 @@ class baseClass:
 
     def logoutAccountSuccessful(self):
         self.driver.find_element(*baseClass.logoutLocator).click()
-        login_page_url = 'https://automationexercise.com/login'
-        return login_page_url
+        # login_page_url = 'https://automationexercise.com/login'
+        # return login_page_url

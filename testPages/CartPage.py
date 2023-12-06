@@ -2,12 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from Utilities.baseClass import baseClass
 from testPages.loginePage import loginPage
 from testPages.PaymentPage import payment
 
 
-class CartPage():
-
+class CartPage(baseClass):
     CartPageSubscribtionText = (By.CSS_SELECTOR, "div[class='single-widget'] h2")
     CartPagesubscibeemail = (By.ID, "susbscribe_email")
     CartPagesubscribeButton = (By.CSS_SELECTOR, "#subscribe")
@@ -15,6 +15,7 @@ class CartPage():
     CheckOutButtonLocator = (By.CSS_SELECTOR, ".btn.btn-default.check_out")
     orderDescription = (By.XPATH, "//textarea[@name='message']")
     placeOrderButton = (By.XPATH, "//a[normalize-space()='Place Order']")
+    removeProductbutton = (By.XPATH, "//td[@class='cart_delete']/a")
 
     def __init__(self, driver):
         self.driver = driver
@@ -43,19 +44,19 @@ class CartPage():
     def register_link(self):
         try:
             registerlink = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//div[@class='modal-content']/div[2]/p[2]/a")))
+                EC.visibility_of_element_located(
+                    (By.XPATH, "//div[@class='modal-content']/div[2]/p[2]/a")))
             registerlink.click()
-            logine_page =  loginPage(self.driver)
+            logine_page = loginPage(self.driver)
             return logine_page
 
         except Exception as e:
             print(f"Error: {e}")
 
-    def continueOnCart(self) :
+    def continueOnCart(self):
         try:
             Cart_page = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(
-                   (By.XPATH, "//div[@class='modal-content']/div[3]/button")))
+                (By.XPATH, "//div[@class='modal-content']/div[3]/button")))
             Cart_page.click()
 
         except Exception as e:
@@ -66,3 +67,22 @@ class CartPage():
         self.driver.find_element(*CartPage.placeOrderButton).click()
         paymentPage = payment(self.driver)
         return paymentPage
+
+    def removeProduct(self):
+        self.driver.find_element(*CartPage.removeProductbutton).click()
+
+        try:
+            product_page = (By.CSS_SELECTOR, "span[id='empty_cart'] a")
+
+            # Wait for the element to be clickable
+            element = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(product_page)
+            )
+
+            # Interact with the element
+            element.click()
+            product_page_url = self.driver.current_url
+            return product_page_url
+
+        except Exception as e:
+            print(f"Error: {e}")

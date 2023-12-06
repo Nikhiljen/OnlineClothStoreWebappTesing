@@ -23,7 +23,10 @@ class productPage(baseClass):
     continueShoppingLocator = (By.XPATH, "//div[@class='modal-content']/div[3]/button")
     viewCartLocator = (By.XPATH, "//div[@class='modal-content']/div[2]/p[2]/a")
     productquntityLocator = (By.ID, "quantity")
-    addCartButton  = ()
+    Barands = (By.XPATH, "//div[@class='brands_products']/h2")
+    Dress_locator = (By.XPATH, "//h2[normalize-space()='Women - Dress Products']")
+    brand_list = (By.XPATH, "//div[@class='brands_products']/div/ul/li/a")
+    new_brand_link = (By.CSS_SELECTOR, "a[href='/brand_products/Madame']")
 
     def __init__(self, driver):
         self.driver = driver
@@ -67,39 +70,38 @@ class productPage(baseClass):
     def productBrand(self):
         return self.driver.find_element(*productPage.brand).text
 
-
     def productAddToCartItem1(self):
         productOption1 = self.driver.find_element(*productPage.productMouseHover1)
         actions = ActionChains(self.driver)
         actions.move_to_element(productOption1).perform()
         productaction1 = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, "//body[1]/section[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]")))
+            EC.visibility_of_element_located(
+                (By.XPATH, "//body[1]/section[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]")))
         actions.move_to_element(productaction1).perform()
-
 
     def productAddToCartItem2(self):
         productOption2 = self.driver.find_element(*productPage.productMouseHover2)
         actions = ActionChains(self.driver)
         actions.move_to_element(productOption2).perform()
         productaction2 = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//body[1]/section[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/a[1]")))
+            EC.presence_of_element_located(
+                (By.XPATH, "//body[1]/section[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/div[1]/a[1]")))
         actions.move_to_element(productaction2).perform()
-
 
     def continueButton(self):
         try:
             continueButton = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//div[@class='modal-content']/div[3]/button")))
+                EC.visibility_of_element_located(
+                    (By.XPATH, "//div[@class='modal-content']/div[3]/button")))
             continueButton.click()
-            self.driver.switch_to.window(self.driver.window_handles[0])
 
         except Exception as e:
             print(f"Error: {e}")
-    def ViewCartButton(self) :
+
+    def ViewCartButton(self):
         try:
             viewCartButton = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(
-                   (By.XPATH, "//u[normalize-space()='View Cart']")))
+                (By.XPATH, "//u[normalize-space()='View Cart']")))
             viewCartButton.click()
             Cartpage = CartPage(self.driver)
             return Cartpage
@@ -113,5 +115,31 @@ class productPage(baseClass):
         quntity_input.send_keys(str(new_quantity))
 
     def addToCart(self):
-        addCartButton = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "button[type='button']")))
+        addCartButton = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "button[type='button']")))
         addCartButton.click()
+
+    def woman_dress_category(self):
+        try:
+            category_element = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(
+                (By.XPATH, "//h2[normalize-space()='Women - Dress Products']")))
+            dress_element_text = category_element.text
+            return dress_element_text
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def Brands_product(self):
+        brands_text = self.driver.find_element(*productPage.Barands).text
+        return brands_text
+
+    def Brands_product_list(self):
+        brand_list = []
+        brand_list = self.driver.find_elements(*productPage.brand_list)
+
+        for brand in brand_list:
+            if "POLO" in brand.text:
+                brand.click()
+                print(brand)
+                break
+        self.driver.find_element(*productPage.new_brand_link).click()
+        return self.driver.current_url
