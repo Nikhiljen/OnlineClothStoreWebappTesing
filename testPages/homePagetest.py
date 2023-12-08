@@ -79,15 +79,14 @@ class HomePage(baseClass):
     def WomanCategory(self):
         self.driver.find_element(*HomePage.woman_category).click()
         # self.driver.find_element(By.CSS_SELECTOR , "a[href = '/category_products/1']").click()
-        product_list = [ ]
+        product_list = []
         product_list = self.driver.find_elements(*HomePage.woman_category_productList)
         for product in product_list:
-            if(product.text == "Dress"):
+            if (product.text == "Dress"):
                 product.click()
                 product_page = productPage(self.driver)
                 return product_page
                 break;
-
 
     @pytest.fixture(params=signUpPageData.homepageTestData)
     def getData(self, request):

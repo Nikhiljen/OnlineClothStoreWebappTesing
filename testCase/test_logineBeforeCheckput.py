@@ -9,7 +9,6 @@ class TestSixteen(baseClass):
         # 3. Verify that home page is visible successfully
         text = self.is_homePage_visible()
         assert "Automation" in text
-
         homepage = HomePage(self.driver)
     
         # 4. Click 'Signup / Login' button
