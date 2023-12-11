@@ -26,10 +26,10 @@ class TestFourteen(baseClass):
         self.verifyLogineAsUser()
 
         # 8. Add products to cart
+        # 9. Click 'Cart' button
         product = homepage.viewSampleProduct()
         product.addToCart()
 
-        # 9. Click 'Cart' button
         # 10. Verify that cart page is displayed
         cartpage = product.ViewCartButton()
         currentUrl = cartpage.cartPageVerification()
@@ -39,7 +39,7 @@ class TestFourteen(baseClass):
         # 11. Click Proceed To Checkout
         cartpage.CheckoutPageButton()
 
-        # 12. Verify Address Details and Review Your Order
+        # 14. Verify Address Details and Review Your Order
 
         # 15. Enter description in comment text area and click 'Place Order'
         place_order = cartpage.order_Description()

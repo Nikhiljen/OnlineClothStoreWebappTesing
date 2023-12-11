@@ -103,8 +103,8 @@ class productPage(baseClass):
             viewCartButton = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(
                 (By.XPATH, "//u[normalize-space()='View Cart']")))
             viewCartButton.click()
-            Cartpage = CartPage(self.driver)
-            return Cartpage
+            Cart_page = CartPage(self.driver)
+            return Cart_page
 
         except Exception as e:
             print(f"Error: {e}")
