@@ -9,8 +9,8 @@ class loginPage:
     signUpButton = (By.CSS_SELECTOR, "button[data-qa='signup-button']")
     userNameLocator = (By.CSS_SELECTOR, "input[data-qa='login-email']")
     passwordLocator = (By.CSS_SELECTOR, "input[data-qa='login-password']")
-    logineButton = (By.CSS_SELECTOR, "button[data-qa='login-button']")
-    unsccessfullMessage = (By.XPATH, "//div[@class='login-form']/form/p")
+    loginButton = (By.CSS_SELECTOR, "button[data-qa='login-button']")
+    unsuccessfulMessage = (By.XPATH, "//div[@class='login-form']/form/p")
     verifyText2 = (By.XPATH, "//div[@class='signup-form']/form/p")
 
     def __init__(self, driver):
@@ -20,33 +20,31 @@ class loginPage:
         verifyText = self.driver.find_element(By.CSS_SELECTOR, "div[class='signup-form'] h2").text
         return verifyText
 
-    def verifyLogineText(self):
-        logineText = self.driver.find_element(By.CSS_SELECTOR, "div[class='login-form'] h2").text
-        return logineText
+    def verifyLoginText(self):
+        loginText = self.driver.find_element(By.CSS_SELECTOR, "div[class='login-form'] h2").text
+        return loginText
 
     def newUserSignUp(self):
         self.driver.find_element(*loginPage.nameLocator).send_keys("Nikhil")
         self.driver.find_element(*loginPage.emailLocator).send_keys("npjengte10@gmail.com")
         self.driver.find_element(*loginPage.signUpButton).click()
-        accountcreationPage = signUpPage(self.driver)
-        return accountcreationPage
-    
-    def logineWithCorrectCredintial(self):
+        account_creation_Page = signUpPage(self.driver)
+        return account_creation_Page
+
+    def loginWithCorrectCredential(self):
         self.driver.find_element(*loginPage.userNameLocator).send_keys("npjengte9@gmail.com")
         self.driver.find_element(*loginPage.passwordLocator).send_keys("Nikhil@123")
-        self.driver.find_element(*loginPage.logineButton).click()
+        self.driver.find_element(*loginPage.loginButton).click()
 
-    def logineWithIncorrectCredintial(self):
+    def loginWithIncorrectCredential(self):
         self.driver.find_element(*loginPage.userNameLocator).send_keys("nikhiljengte@gmail.com")
         self.driver.find_element(*loginPage.passwordLocator).send_keys("nikhil123")
-        self.driver.find_element(*loginPage.logineButton).click()
-        return self.driver.find_element(*loginPage.unsccessfullMessage).text
-    
-    
+        self.driver.find_element(*loginPage.loginButton).click()
+        return self.driver.find_element(*loginPage.unsuccessfulMessage).text
+
     def UserExitEmail(self):
         self.driver.find_element(*loginPage.nameLocator).send_keys("Nikhil")
         self.driver.find_element(*loginPage.emailLocator).send_keys("npjengte@gmail.com")
         self.driver.find_element(*loginPage.signUpButton).click()
         verifyText = self.driver.find_element(*loginPage.verifyText2).text
         return verifyText
-

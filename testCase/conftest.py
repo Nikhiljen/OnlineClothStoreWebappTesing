@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.common import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
 driver = None
 
@@ -16,7 +17,9 @@ def Setup(request):
         if browser_name == "chrome":
             path = r"C:\driver\chromedriver-win64\chromedriver.exe"
             service = ChromeService(executable_path=path)
-            driver = webdriver.Chrome(service=service)
+            chrome_options = Options()
+            chrome_options.add_argument("--headless")
+            driver = webdriver.Chrome(service=service, options=chrome_options)
         elif browser_name == "msedge":
             path = r"C:\driver\msedgedriver.exe"
             service = ChromeService(executable_path=path)

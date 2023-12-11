@@ -1,30 +1,37 @@
-# Test Case 16: Place Order: Login before Checkout
+# Test Case 15: Place Order: Register before Checkout
 from Utilities.baseClass import baseClass
 from testPages.homePagetest import HomePage
 
-class TestSixteen(baseClass):
-    def test_logine_before_checkout(self):
+class TestFifteen(baseClass):
+    def test_place_OrderRegister_before_checkout(self):
         # 1. Launch browser
         # 2. Navigate to url 'http://automationexercise.com'
         # 3. Verify that home page is visible successfully
         text = self.is_homePage_visible()
         assert "Automation" in text
+
         homepage = HomePage(self.driver)
-    
         # 4. Click 'Signup / Login' button
-        User_logine = homepage.signupButton()
-        # 5. Fill email, password and click 'Login' button
-        User_logine.logineWithCorrectCredintial()
-        # 6. Verify 'Logged in as username' at top
-        self.verifyLogineAsUser()
+        new_user = homepage.signupButton()
+        new_user_details = new_user.newUserSignUp()
+
+        # 5. Fill all details in Signup and create account
+        new_user_details.accountInformationPage()
+        new_user_details.addressInformationPage()
+
+        # 6. Verify 'ACCOUNT CREATED!' and click 'Continue' button
+        new_user_details.VerifyAccountCreationPage()
+
+        # 7. Verify ' Logged in as username' at top
+        self.verifyLoginAsUser()
 
         # 8. Add products to cart
+        # 9. Click 'Cart' button
         product = homepage.viewSampleProduct()
         product.addToCart()
-        product.continueButton()
-        # 9. Click 'Cart' button
-        cart_page = homepage.CartButton()
+
         # 10. Verify that cart page is displayed
+        cart_page = product.ViewCartButton()
         currentUrl = cart_page.cartPageVerification()
         actualUrl = "https://automationexercise.com/view_cart"
         assert currentUrl == actualUrl
@@ -32,7 +39,7 @@ class TestSixteen(baseClass):
         # 11. Click Proceed To Checkout
         cart_page.CheckoutPageButton()
 
-        # 12. Verify Address Details and Review Your Order
+        # 14. Verify Address Details and Review Your Order
 
         # 15. Enter description in comment text area and click 'Place Order'
         place_order = cart_page.order_Description()
@@ -49,5 +56,5 @@ class TestSixteen(baseClass):
 
         # 19. Click 'Delete Account' button
         # 20. Verify 'ACCOUNT DELETED!' and click 'Continue' button
-        delete_account_messge = self.verifyDeleteAccountSuccessful()
-        assert "ACCOUNT DELETED!" in delete_account_messge
+        delete_account_message = self.verifyDeleteAccountSuccessful()
+        assert "ACCOUNT DELETED!" in delete_account_message

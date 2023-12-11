@@ -1,4 +1,5 @@
-from selenium.webdriver.common.by import By
+# Test Case 18: View Category Products
+
 
 from Utilities.baseClass import baseClass
 from testPages.homePagetest import HomePage
@@ -12,7 +13,7 @@ class TestEighteen(baseClass):
         text = self.is_homePage_visible()
         assert "Automation" in text
 
-        # 3. Verify that categories are visible on left side bar
+        # 3. Verify that categories are visible on left sidebar
         homepage = HomePage(self.driver)
         category_text = homepage.category()
         assert "CATEGORY" in category_text
@@ -23,5 +24,4 @@ class TestEighteen(baseClass):
 
         # 6. Verify that category page is displayed and confirm text 'WOMEN - DRESS PRODUCTS'
         category_text = woman_dress_page.woman_dress_category()
-        assert  "WOMEN - DRESS PRODUCTS" in category_text, "Category text does not match the expected text"
-
+        assert "WOMEN - DRESS PRODUCTS" in category_text, "Category text does not match the expected text"

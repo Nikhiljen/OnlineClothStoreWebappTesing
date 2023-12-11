@@ -14,9 +14,8 @@ class baseClass:
     deleteAccountButton = (By.CSS_SELECTOR, "a[href='/delete_account']")
     accountDeleteMessage = (By.CSS_SELECTOR, "h2[class='title text-center'] b")
     continueButtonAfterDeleteAccount = (By.CSS_SELECTOR, ".btn.btn-primary")
-    logineUserLocator = (By.XPATH, "//li[10]//a[1]")
+    loginUserLocator = (By.XPATH, "//li[10]//a[1]")
     logoutLocator = (By.CSS_SELECTOR, "a[href='/logout']")
-
 
     def getLogger(self):
         loggerName = inspect.stack()[1][3]
@@ -36,20 +35,20 @@ class baseClass:
             element_present = EC.presence_of_element_located(
                 (By.XPATH, "//img[@alt='Website for automation practice']"))
             wait.until(element_present)
-            log.info("Page loaded successfully!")   
+            log.info("Page loaded successfully!")
             return self.driver.title
         except TimeoutException:
             log.info("Timed out waiting for page to load.")
 
-    def verifyLogineAsUser(self):
-        logineUserText = self.driver.find_element(*baseClass.logineUserLocator).text
-        return logineUserText
+    def verifyLoginAsUser(self):
+        loginUserText = self.driver.find_element(*baseClass.loginUserLocator).text
+        return loginUserText
 
     def verifyDeleteAccountSuccessful(self):
         self.driver.find_element(*baseClass.deleteAccountButton).click()
-        deleteAccountMessgaeText = self.driver.find_element(*baseClass.accountDeleteMessage).text
+        deleteAccountMessageText = self.driver.find_element(*baseClass.accountDeleteMessage).text
         self.driver.find_element(*baseClass.continueButtonAfterDeleteAccount).click()
-        return deleteAccountMessgaeText
+        return deleteAccountMessageText
 
     def logoutAccountSuccessful(self):
         self.driver.find_element(*baseClass.logoutLocator).click()

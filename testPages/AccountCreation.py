@@ -12,7 +12,7 @@ class signUpPage:
     Month = (By.ID, "months")
     Year = (By.ID, "years")
     NewsLetter = (By.ID, "newsletter")
-    Optin = (By.CSS_SELECTOR, "#optin")
+    Option = (By.CSS_SELECTOR, "#optin")
     firstName = (By.CSS_SELECTOR, "#first_name")
     lastName = (By.ID, "last_name")
     companyName = (By.CSS_SELECTOR, "#company")
@@ -24,7 +24,7 @@ class signUpPage:
     zipcodeNo = (By.CSS_SELECTOR, "#zipcode")
     mobileNo = (By.CSS_SELECTOR, "#mobile_number")
     submitButton = (By.CSS_SELECTOR, "button[data-qa='create-account']")
-    subitMessage = (By.CSS_SELECTOR, ".title.text-center")
+    submitMessage = (By.CSS_SELECTOR, ".title.text-center")
     continueButton = (By.CSS_SELECTOR, ".btn.btn-primary")
 
     def __init__(self, driver):
@@ -57,6 +57,6 @@ class signUpPage:
         self.driver.find_element(*signUpPage.submitButton).click()
         
     def VerifyAccountCreationPage(self):
-        accountCreationtext = self.driver.find_element(*signUpPage.subitMessage).text
+        account_Creation_text = self.driver.find_element(*signUpPage.submitMessage).text
         self.driver.find_element(*signUpPage.continueButton).click()
-        return accountCreationtext
+        return account_Creation_text

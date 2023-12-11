@@ -17,7 +17,7 @@ class TestTwentyOne(baseClass):
         # 3. Click on 'Products' button
         product_page = homepage.productButton()
         # 4. Verify user is navigated to ALL PRODUCTS page successfully
-        product_page_text = product_page.productlinkpage()
+        product_page_text = product_page.product_link_page()
         acctual_text  = "ALL PRODUCTS"
         assert acctual_text == product_page_text, "This text is not correct"
 

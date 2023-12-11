@@ -32,8 +32,8 @@ class HomePage(baseClass):
 
     def signupButton(self):
         self.driver.find_element(By.CSS_SELECTOR, "a[href='/login']").click()
-        loginepage = loginPage(self.driver)
-        return loginepage
+        login_page = loginPage(self.driver)
+        return login_page
 
     def contactUsButton(self):
         self.driver.find_element(*HomePage.ContactUsButton).click()
@@ -47,19 +47,24 @@ class HomePage(baseClass):
 
     def productButton(self):
         self.driver.find_element(*HomePage.productPageButton).click()
-        productpage = productPage(self.driver)
-        return productpage
+        product_page = productPage(self.driver)
+        return product_page
 
     def CartButton(self):
         self.driver.find_element(*HomePage.CartPageButton).click()
-        cartpage = CartPage(self.driver)
-        return cartpage
+        cart_page = CartPage(self.driver)
+        return cart_page
 
-    def verifySubscriptionTextHompage(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    def verifySubscriptionTextHomepage(self):
+        element = self.driver.find_element(By.CSS_SELECTOR, "div[class='single-widget'] h2")
+        while not element.is_displayed():
+            self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # Optionally, you can add a delay or wait for the element explicitly
+        WebDriverWait(self.driver, 10).until(EC.visibility_of(element))
         return self.driver.find_element(*HomePage.subscribeText).text
 
-    def subscriptionSuccefullonHomepage(self):
+    def subscriptionSuccessfulHomepage(self):
         self.driver.find_element(*HomePage.subscriptionLocator).send_keys("nik@gmail.com")
         self.driver.find_element(*HomePage.subscribeButton).click()
         success_message_element = WebDriverWait(self.driver, 10).until(
@@ -69,8 +74,8 @@ class HomePage(baseClass):
 
     def viewSampleProduct(self):
         self.driver.find_element(*HomePage.viewProductLocator).click()
-        productpage = productPage(self.driver)
-        return productpage
+        product_page = productPage(self.driver)
+        return product_page
 
     def category(self):
         category_text = self.driver.find_element(*HomePage.category_locator).text
@@ -79,14 +84,14 @@ class HomePage(baseClass):
     def WomanCategory(self):
         self.driver.find_element(*HomePage.woman_category).click()
         # self.driver.find_element(By.CSS_SELECTOR , "a[href = '/category_products/1']").click()
-        product_list = []
         product_list = self.driver.find_elements(*HomePage.woman_category_productList)
         for product in product_list:
-            if (product.text == "Dress"):
+            if product.text == "Dress":
                 product.click()
-                product_page = productPage(self.driver)
-                return product_page
-                break;
+                break
+        product_page = productPage(self.driver)
+        return product_page
+
 
     @pytest.fixture(params=signUpPageData.homepageTestData)
     def getData(self, request):
