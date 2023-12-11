@@ -25,7 +25,7 @@ class TestTwentyThree(baseClass):
         new_user_details.VerifyAccountCreationPage()
 
         # 7. Verify ' Logged in as username' at top
-        self.verifyLoginAsUser()
+        self.verifyLogineAsUser()
 
         # 8. Add products to cart
         # 9. Click 'Cart' button
