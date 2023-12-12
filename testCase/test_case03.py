@@ -1,7 +1,8 @@
 # Test Case 3: Login User with incorrect email and password
-
+import pytest
 
 from Utilities.baseClass import baseClass
+from testData.testSignUpData import signUpPageData
 from testPages.homePagetest import HomePage
 
 
@@ -26,3 +27,7 @@ class TestThree(baseClass):
         # 8. Verify error 'Your email or password is incorrect!' is visible
         message_Success = signupPage.loginWithIncorrectCredential()
         assert "Your email or password is incorrect!" in message_Success
+
+    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    def getData(self, request):
+        return request.param

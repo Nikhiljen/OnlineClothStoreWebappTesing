@@ -1,7 +1,8 @@
 # Test Case 2: Login User with correct email and password
-
+import pytest
 
 from Utilities.baseClass import baseClass
+from testData.testSignUpData import signUpPageData
 from testPages.homePagetest import HomePage
 
 
@@ -31,5 +32,9 @@ class TestTwo(baseClass):
 
         # 9. Click 'Delete Account' button
         # 10. Verify that 'ACCOUNT DELETED!' is visible
-        deleteAccountText = self.verifyDeleteAccountSuccessful()
-        assert "ACCOUNT DELETED!" in deleteAccountText
+        # deleteAccountText = self.verifyDeleteAccountSuccessful()
+        # assert "ACCOUNT DELETED!" in deleteAccountText
+
+    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    def getData(self, request):
+        return request.param

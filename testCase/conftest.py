@@ -40,6 +40,4 @@ def Setup(request):
     driver.close()
 
 
-@pytest.fixture(params=signUpPageData.getTestData(["TC0001", "TC0002"]))
-def getData(self, request):
-    return request.param
+

@@ -27,8 +27,8 @@ class loginPage(baseClass):
         return loginText
 
     def newUserSignUp(self, getData):
-        self.driver.find_element(*loginPage.nameLocator).send_keys(self.getData["Name"])
-        self.driver.find_element(*loginPage.emailLocator).send_keys(self.getData["email"])
+        self.driver.find_element(*loginPage.nameLocator).send_keys(getData["Name"])
+        self.driver.find_element(*loginPage.emailLocator).send_keys(getData["email"])
         self.driver.find_element(*loginPage.signUpButton).click()
         account_creation_Page = signUpPage(self.driver)
         return account_creation_Page

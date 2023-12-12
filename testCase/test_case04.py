@@ -1,6 +1,8 @@
 # Test Case 4: Logout User
+import pytest
 
 from Utilities.baseClass import baseClass
+from testData.testSignUpData import signUpPageData
 from testPages.homePagetest import HomePage
 class TestFour(baseClass):
     def test_logoutUser(self):
@@ -30,4 +32,8 @@ class TestFour(baseClass):
         # 9. Click 'Logout' button
         # 10. Verify that user is navigated to login page
         login_page_url = self.logoutAccountSuccessful()
-        assert self.driver.current_url == login_page_url, f"Expected URL: {login_page_url}, Actual URL: {self.driver.current_url}"
+        assert self.driver.current_url == login_page_url, f"Expected URL: {login_page_url}, Actual URL: {self.driver.current_url} "
+
+    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    def getData(self, request):
+        return request.param

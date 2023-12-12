@@ -34,26 +34,26 @@ class signUpPage:
         verifyText = self.driver.find_element(*signUpPage.verifyText2).text
         return verifyText
 
-    def accountInformationPage(self):
+    def accountInformationPage(self, getData):
         self.driver.find_element(*signUpPage.tileLocator).click()
-        assert self.driver.find_element(*signUpPage.Name).get_attribute('value') == "Nikhil"
-        assert self.driver.find_element(*signUpPage.Email).get_attribute('value') == "npjengte10@gmail.com"
-        self.driver.find_element(*signUpPage.Password).send_keys("Nikhil@123")
-        Select(self.driver.find_element(*signUpPage.Day)).select_by_value("4")
-        Select(self.driver.find_element(*signUpPage.Month)).select_by_visible_text("June")
-        Select(self.driver.find_element(*signUpPage.Year)).select_by_value("1992")
+        assert self.driver.find_element(*signUpPage.Name).get_attribute('value') == getData["Name"]
+        assert self.driver.find_element(*signUpPage.Email).get_attribute('value') == getData["email"]
+        self.driver.find_element(*signUpPage.Password).send_keys(getData["password"])
+        Select(self.driver.find_element(*signUpPage.Day)).select_by_value(getData["Day"])
+        Select(self.driver.find_element(*signUpPage.Month)).select_by_visible_text(getData["Month"])
+        Select(self.driver.find_element(*signUpPage.Year)).select_by_value(getData["year"])
 
-    def addressInformationPage(self):
-        self.driver.find_element(*signUpPage.firstName).send_keys("Nikhil")
-        self.driver.find_element(*signUpPage.lastName).send_keys("Jengte")
-        self.driver.find_element(*signUpPage.companyName).send_keys("PDM")
-        self.driver.find_element(*signUpPage.address1).send_keys("Tahsil Office Mul")
-        self.driver.find_element(*signUpPage.address2).send_keys("Chandrapur")
-        Select(self.driver.find_element(*signUpPage.countryName)).select_by_visible_text("India")
-        self.driver.find_element(*signUpPage.stateName).send_keys("Maharashtra")
-        self.driver.find_element(*signUpPage.cityName).send_keys("Mul")
-        self.driver.find_element(*signUpPage.zipcodeNo).send_keys("441224")
-        self.driver.find_element(*signUpPage.mobileNo).send_keys("1234567890")
+    def addressInformationPage(self, getData):
+        self.driver.find_element(*signUpPage.firstName).send_keys(getData["FirstName"])
+        self.driver.find_element(*signUpPage.lastName).send_keys(getData["LastName"])
+        self.driver.find_element(*signUpPage.companyName).send_keys(getData["Company"])
+        self.driver.find_element(*signUpPage.address1).send_keys(getData["Address"])
+        self.driver.find_element(*signUpPage.address2).send_keys(getData["Address2"])
+        Select(self.driver.find_element(*signUpPage.countryName)).select_by_visible_text(getData["country"])
+        self.driver.find_element(*signUpPage.stateName).send_keys(getData["State"])
+        self.driver.find_element(*signUpPage.cityName).send_keys(getData["City"])
+        self.driver.find_element(*signUpPage.zipcodeNo).send_keys(getData["Zipcode"])
+        self.driver.find_element(*signUpPage.mobileNo).send_keys(getData["MobileNumber"])
         self.driver.find_element(*signUpPage.submitButton).click()
         
     def VerifyAccountCreationPage(self):

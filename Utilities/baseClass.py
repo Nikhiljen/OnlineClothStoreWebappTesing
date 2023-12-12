@@ -19,7 +19,8 @@ class baseClass:
     loginUserLocator = (By.XPATH, "//li[10]//a[1]")
     logoutLocator = (By.CSS_SELECTOR, "a[href='/logout']")
 
-    def getLogger(self):
+    @staticmethod
+    def getLogger():
         loggerName = inspect.stack()[1][3]
         logger = logging.getLogger(loggerName)
         fileHandler = logging.FileHandler(r"D:\AutomatedStore\logReports\reports.log")
@@ -54,9 +55,5 @@ class baseClass:
 
     def logoutAccountSuccessful(self):
         self.driver.find_element(*baseClass.logoutLocator).click()
-        # login_page_url = 'https://automationexercise.com/login'
-        # return login_page_url
-
-    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
-    def getData(self, request):
-        return request.param
+        login_page_url = 'https://automationexercise.com/login'
+        return login_page_url
