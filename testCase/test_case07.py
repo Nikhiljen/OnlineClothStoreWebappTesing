@@ -19,5 +19,5 @@ class TestSeven(baseClass):
         testCasePage = homepage.testCaseButton()
 
         # 5. Verify user is navigated to test cases page successfully
-        testcase_url = testCasePage.testCasepage()
+        testcase_url = testCasePage.test_case_page()
         assert 'https://automationexercise.com/test_cases' == testcase_url, f"Expected URL: {'https://automationexercise.com/test_cases'}, Actual URL: {testcase}"

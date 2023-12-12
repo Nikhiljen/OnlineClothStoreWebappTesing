@@ -4,12 +4,10 @@ from Utilities.baseClass import baseClass
 
 
 class testCasePage(baseClass):
-
-    messagedisply = (By.XPATH, "//div[@class='panel-group']/h5/span")
-
+    MessagePack = (By.XPATH, "//div[@class='panel-group']/h5/span")
 
     def __init__(self, driver):
         self.driver = driver
 
-    def testCasepage(self):
+    def test_case_page(self):
         return self.driver.current_url

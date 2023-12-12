@@ -8,5 +8,6 @@ class order_confirm(baseClass):
 
     def __init__(self, driver):
         self.driver = driver
+
     def OrderConfirmVerification(self):
         return self.driver.find_element(*order_confirm.order_confirm_locator).text

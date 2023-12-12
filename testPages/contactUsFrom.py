@@ -7,39 +7,39 @@ from Utilities.baseClass import baseClass
 
 class contactUs(baseClass):
     messageLocator = (By.XPATH, "//div[@class='contact-form']/h2")
-    namepath = (By.CSS_SELECTOR, "input[placeholder='Name']")
-    emailpath = (By.XPATH, "//input[@placeholder='Email']")
-    subjectpath = (By.CSS_SELECTOR, "input[placeholder='Subject']")
-    messagepath = (By.ID, "message")
+    name_path = (By.CSS_SELECTOR, "input[placeholder='Name']")
+    email_path = (By.XPATH, "//input[@placeholder='Email']")
+    subject_path = (By.CSS_SELECTOR, "input[placeholder='Subject']")
+    message_path = (By.ID, "message")
     filepath = (By.XPATH, "//input[@name='upload_file']")
-    submitpath = (By.CSS_SELECTOR, "input[value='Submit']")
-    successmessagepath = (By.XPATH, "//div[@class='contact-form']/div[2]")
-    homereturnpath = (By.XPATH, "//div[@id='form-section']/a/span/i")
+
+    success_message_path = (By.XPATH, "//div[@class='contact-form']/div[2]")
+    home_return_path = (By.XPATH, "//div[@id='form-section']/a/span/i")
 
     def __init__(self, driver):
         self.driver = driver
 
-    def getintouchText(self):
+    def get_intouchText(self):
         return self.driver.find_element(*contactUs.messageLocator).text
 
-    def fillupdata(self):
-        self.driver.find_element(*contactUs.namepath).send_keys("Nikhil")
-        self.driver.find_element(*contactUs.emailpath).send_keys("Nikhil@gmail.com")
-        self.driver.find_element(*contactUs.subjectpath).send_keys("Error while loging")
-        self.driver.find_element(*contactUs.messagepath).send_keys("Error while loging in our website")
-        self.driver.find_element(*contactUs.submitpath).click()
+    def fill_up_data(self):
+        self.driver.find_element(*contactUs.name_path).send_keys("Nikhil")
+        self.driver.find_element(*contactUs.email_path).send_keys("Nikhil@gmail.com")
+        self.driver.find_element(*contactUs.subject_path).send_keys("Error while loging")
+        self.driver.find_element(*contactUs.message_path).send_keys("Error while loging in our website")
+
         # Wait for the alert to appear (if necessary)
         time.sleep(2)
 
-    def alertcheck(self):
+    def alert_check(self):
         # Switch to the alert
         alert = self.driver.switch_to.alert
         # Accept the alert (click OK)
         alert.accept()
 
-    def verifyContactusmessage(self):
-        return self.driver.find_element(*contactUs.successmessagepath).text
+    def verify_Contactus_message(self):
+        return self.driver.find_element(*contactUs.success_message_path).text
 
-    def homepagereturn(self):
-        self.driver.find_element(*contactUs.homereturnpath).click()
+    def homePage_return(self):
+        self.driver.find_element(*contactUs.home_return_path).click()
         return self.driver.current_url

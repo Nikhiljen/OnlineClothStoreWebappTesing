@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from testData.testSignUpData import signUpPageData
+
 
 @pytest.mark.usefixtures("Setup")
 class baseClass:
@@ -54,3 +56,7 @@ class baseClass:
         self.driver.find_element(*baseClass.logoutLocator).click()
         # login_page_url = 'https://automationexercise.com/login'
         # return login_page_url
+
+    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    def getData(self, request):
+        return request.param

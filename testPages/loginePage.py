@@ -1,9 +1,11 @@
+import pytest
 from selenium.webdriver.common.by import By
 
+from Utilities.baseClass import baseClass
 from testPages.AccountCreation import signUpPage
 
 
-class loginPage:
+class loginPage(baseClass):
     nameLocator = (By.CSS_SELECTOR, "input[placeholder='Name']")
     emailLocator = (By.XPATH, "//input[@data-qa='signup-email']")
     signUpButton = (By.CSS_SELECTOR, "button[data-qa='signup-button']")
@@ -24,27 +26,28 @@ class loginPage:
         loginText = self.driver.find_element(By.CSS_SELECTOR, "div[class='login-form'] h2").text
         return loginText
 
-    def newUserSignUp(self):
-        self.driver.find_element(*loginPage.nameLocator).send_keys("Nikhil")
-        self.driver.find_element(*loginPage.emailLocator).send_keys("npjengte10@gmail.com")
+    def newUserSignUp(self, getData):
+        self.driver.find_element(*loginPage.nameLocator).send_keys(self.getData["Name"])
+        self.driver.find_element(*loginPage.emailLocator).send_keys(self.getData["email"])
         self.driver.find_element(*loginPage.signUpButton).click()
         account_creation_Page = signUpPage(self.driver)
         return account_creation_Page
 
-    def loginWithCorrectCredential(self):
+    def loginWithCorrectCredential(self, getData):
         self.driver.find_element(*loginPage.userNameLocator).send_keys("npjengte9@gmail.com")
         self.driver.find_element(*loginPage.passwordLocator).send_keys("Nikhil@123")
         self.driver.find_element(*loginPage.loginButton).click()
 
-    def loginWithIncorrectCredential(self):
+    def loginWithIncorrectCredential(self, getData):
         self.driver.find_element(*loginPage.userNameLocator).send_keys("nikhiljengte@gmail.com")
         self.driver.find_element(*loginPage.passwordLocator).send_keys("nikhil123")
         self.driver.find_element(*loginPage.loginButton).click()
         return self.driver.find_element(*loginPage.unsuccessfulMessage).text
 
-    def UserExitEmail(self):
+    def UserExitEmail(self, getData):
         self.driver.find_element(*loginPage.nameLocator).send_keys("Nikhil")
         self.driver.find_element(*loginPage.emailLocator).send_keys("npjengte@gmail.com")
         self.driver.find_element(*loginPage.signUpButton).click()
         verifyText = self.driver.find_element(*loginPage.verifyText2).text
         return verifyText
+

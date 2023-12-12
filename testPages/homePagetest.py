@@ -93,6 +93,3 @@ class HomePage(baseClass):
         return product_page
 
 
-    @pytest.fixture(params=signUpPageData.homepageTestData)
-    def getData(self, request):
-        return request.param

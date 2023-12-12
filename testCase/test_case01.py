@@ -24,10 +24,8 @@ class TestOne(baseClass):
 
         # 6. Enter name and email address
         # 7. Click 'Signup' button
-
-        # 13. Click 'Create Account button'
-        # 14. Verify that 'ACCOUNT CREATED!' is visible
-        newUserSignup = signupPage.newUserSignUp()
+        testCaseNo = "TC0001"
+        newUserSignup = signupPage.newUserSignUp(self.testCaseNo)
 
         # 8. Verify that 'ENTER ACCOUNT INFORMATION' is visible
         accountInfoText = newUserSignup.accountInformationText()

@@ -3,12 +3,17 @@ from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service as ChromeService
+from testData.testSignUpData import signUpPageData
+
 driver = None
+
 
 def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome"
     )
+
+
 @pytest.fixture(scope="class")
 def Setup(request):
     global driver
@@ -34,3 +39,7 @@ def Setup(request):
     yield
     driver.close()
 
+
+@pytest.fixture(params=signUpPageData.getTestData(["TC0001", "TC0002"]))
+def getData(self, request):
+    return request.param
