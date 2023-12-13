@@ -5,7 +5,7 @@ from Utilities.baseClass import baseClass
 from testData.testSignUpData import signUpPageData
 from testPages.homePagetest import HomePage
 class TestFour(baseClass):
-    def test_logoutUser(self):
+    def test_logoutUser(self, getData):
         # 1. Launch browser
         # 2. Navigate to url 'http://automationexercise.com'
         # 3. Verify that home page is visible successfully
@@ -23,7 +23,7 @@ class TestFour(baseClass):
 
         # 6. Enter correct email address and password
         # 7. Click 'login' button
-        loginPage.loginWithCorrectCredential()
+        loginPage.loginWithCorrectCredential(getData)
 
         # 8. Verify that 'Logged in as username' is visible
         loginUserText = self.verifyLoginAsUser()
@@ -34,6 +34,6 @@ class TestFour(baseClass):
         login_page_url = self.logoutAccountSuccessful()
         assert self.driver.current_url == login_page_url, f"Expected URL: {login_page_url}, Actual URL: {self.driver.current_url} "
 
-    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    @pytest.fixture(params=signUpPageData.getTestData("TC0004"))
     def getData(self, request):
         return request.param

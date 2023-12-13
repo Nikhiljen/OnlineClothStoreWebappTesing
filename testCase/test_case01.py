@@ -62,3 +62,5 @@ class TestOne(baseClass):
         deleteAccountText = self.verifyDeleteAccountSuccessful()
         assert "ACCOUNT DELETED!" in deleteAccountText
         log.info("account delete successful")
+
+

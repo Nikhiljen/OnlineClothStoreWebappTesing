@@ -1,13 +1,14 @@
 # Test Case 5: Register User with existing email
-
+import pytest
 
 from Utilities.baseClass import baseClass
+from testData.testSignUpData import signUpPageData
 from testPages.homePagetest import HomePage
 
 
 class TestFive(baseClass):
 
-    def test_register_User_withExisting_Exit(self):
+    def test_register_User_withExisting_Exit(self, getData):
         log = self.getLogger()
         # 1. Launch browser
         # 2. Navigate to url 'http://automationexercise.com'
@@ -27,5 +28,9 @@ class TestFive(baseClass):
         # 6. Enter name and already registered email address
         # 7. Click 'Signup' button
         # 8. Verify error 'Email Address already exist!' is visible
-        returnText = signupPage.UserExitEmail()
+        returnText = signupPage.UserExitEmail(getData)
         assert "Email Address already exist!" in returnText
+
+    @pytest.fixture(params=signUpPageData.getTestData("TC0005"))
+    def getData(self, request):
+        return request.param

@@ -7,7 +7,7 @@ from testPages.homePagetest import HomePage
 
 
 class TestThree(baseClass):
-    def test_LoginWithIncorrectData(self):
+    def test_LoginWithIncorrectData(self, getData):
         # 1. Launch browser
         # 2. Navigate to url 'http://automationexercise.com'
         # 3. Verify that home page is visible successfully
@@ -25,9 +25,9 @@ class TestThree(baseClass):
         # 6. Enter incorrect email address and password
         # 7. Click 'login' button
         # 8. Verify error 'Your email or password is incorrect!' is visible
-        message_Success = signupPage.loginWithIncorrectCredential()
+        message_Success = signupPage.loginWithIncorrectCredential(getData)
         assert "Your email or password is incorrect!" in message_Success
 
-    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    @pytest.fixture(params=signUpPageData.getTestData("TC0003"))
     def getData(self, request):
         return request.param

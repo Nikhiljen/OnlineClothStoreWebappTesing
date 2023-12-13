@@ -7,7 +7,7 @@ from testPages.homePagetest import HomePage
 
 
 class TestTwo(baseClass):
-    def test_LoginWithCorrectData(self):
+    def test_LoginWithCorrectData(self, getData):
         # 1. Launch browser
         # 2. Navigate to url 'http://automationexercise.com'
         # 3. Verify that home page is visible successfully
@@ -24,7 +24,7 @@ class TestTwo(baseClass):
 
         # 6. Enter correct email address and password
         # 7. Click 'login' button
-        signupPage.loginWithCorrectCredential()
+        signupPage.loginWithCorrectCredential(getData)
 
         # 8. Verify that 'Logged in as username' is visible
         loginUserText = self.verifyLoginAsUser()
@@ -35,6 +35,6 @@ class TestTwo(baseClass):
         # deleteAccountText = self.verifyDeleteAccountSuccessful()
         # assert "ACCOUNT DELETED!" in deleteAccountText
 
-    @pytest.fixture(params=signUpPageData.getTestData("TC0001"))
+    @pytest.fixture(params=signUpPageData.getTestData("TC0002"))
     def getData(self, request):
         return request.param

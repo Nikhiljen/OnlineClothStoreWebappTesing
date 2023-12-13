@@ -1,4 +1,4 @@
-import pytest
+
 from selenium.webdriver.common.by import By
 
 from Utilities.baseClass import baseClass
@@ -34,20 +34,19 @@ class loginPage(baseClass):
         return account_creation_Page
 
     def loginWithCorrectCredential(self, getData):
-        self.driver.find_element(*loginPage.userNameLocator).send_keys("npjengte9@gmail.com")
-        self.driver.find_element(*loginPage.passwordLocator).send_keys("Nikhil@123")
+        self.driver.find_element(*loginPage.userNameLocator).send_keys(getData["email"])
+        self.driver.find_element(*loginPage.passwordLocator).send_keys(getData["password"])
         self.driver.find_element(*loginPage.loginButton).click()
 
     def loginWithIncorrectCredential(self, getData):
-        self.driver.find_element(*loginPage.userNameLocator).send_keys("nikhiljengte@gmail.com")
-        self.driver.find_element(*loginPage.passwordLocator).send_keys("nikhil123")
+        self.driver.find_element(*loginPage.userNameLocator).send_keys(getData["email"])
+        self.driver.find_element(*loginPage.passwordLocator).send_keys(getData["password"])
         self.driver.find_element(*loginPage.loginButton).click()
         return self.driver.find_element(*loginPage.unsuccessfulMessage).text
 
     def UserExitEmail(self, getData):
-        self.driver.find_element(*loginPage.nameLocator).send_keys("Nikhil")
-        self.driver.find_element(*loginPage.emailLocator).send_keys("npjengte@gmail.com")
+        self.driver.find_element(*loginPage.nameLocator).send_keys(getData["Name"])
+        self.driver.find_element(*loginPage.emailLocator).send_keys(getData["email"])
         self.driver.find_element(*loginPage.signUpButton).click()
         verifyText = self.driver.find_element(*loginPage.verifyText2).text
         return verifyText
-
